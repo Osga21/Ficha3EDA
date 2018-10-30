@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 int main(){
+/*
 	Matriz m;
 	Matriz z;
 	Matriz n(3, 3); //usando construtor por defeito
@@ -36,7 +37,15 @@ int main(){
 	t.Ler("matrizt.txt");
 	f=t.DecomporLU();
 	f.Escrever();
-	
+*/
+
+	Matriz m3;
+
+	m3.Ler("m3.txt");
+	m3 = m3.DecomporLU();
+	m3.Escrever();
+	printf("\nDeterminante de m3: %g\n",m3.calcularDet());
+
 
 	system("pause");
 }

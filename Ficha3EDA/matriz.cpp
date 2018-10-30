@@ -199,6 +199,20 @@ Matriz Matriz::DecomporLU()
 		return LU;
 }
 
+float Matriz::calcularDet()
+/*Apenas para matrizes quadradas, baseado em DecomporLU*/
+{
+	float det = 1;
+	for (int i = 0; i < nlinhas; i++) {
+		for (int j = 0; j < ncols; j++) {
+			if (i == j) {
+				det *= elems[i][j];
+			}
+		}
+	}
+	
+	return det;
+}
 
 
 

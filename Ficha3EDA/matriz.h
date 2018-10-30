@@ -26,4 +26,9 @@ class Matriz {
 		bool Ler(const char * nome_ficheiro);
 		void Escrever();
 		Matriz DecomporLU();
+
+		//Ficha 3
+		float calcularDet();
+		Matriz obterInversa();
+
 };
