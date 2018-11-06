@@ -23,14 +23,14 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="matriz.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="m3.txt" />
     <Text Include="matriz1.txt" />
     <Text Include="matriz2.txt" />
     <Text Include="matrizt.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="matriz.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

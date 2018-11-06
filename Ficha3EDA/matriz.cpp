@@ -214,5 +214,22 @@ float Matriz::calcularDet()
 	return det;
 }
 
+Matriz Matriz::obterInversa()
+{	
+	
+	Matriz y(nlinhas,ncols);
+	for (int i = 0; i < nlinhas;i++) {
+		for (int j = 0; j < ncols;j++) {
+			if (i == j) {
+			}
+			else {
+
+			}
+		}
+	}
+	return Matriz();
+}
+
+
 
 
