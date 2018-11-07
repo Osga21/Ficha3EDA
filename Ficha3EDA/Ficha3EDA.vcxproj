@@ -125,6 +125,7 @@
     <Text Include="m3.txt" />
     <Text Include="matriz1.txt" />
     <Text Include="matriz2.txt" />
+    <Text Include="matriz4.txt" />
     <Text Include="matrizt.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

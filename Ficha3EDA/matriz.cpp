@@ -216,17 +216,31 @@ float Matriz::calcularDet()
 
 Matriz Matriz::obterInversa()
 {	
-	
-	Matriz y(nlinhas,ncols);
-	for (int i = 0; i < nlinhas;i++) {
-		for (int j = 0; j < ncols;j++) {
-			if (i == j) {
+	Matriz LU= DecomporLU();
+	Matriz Y(nlinhas,ncols);
+	Matriz B(nlinhas, ncols);
+	B = Y;
+	for (int i = 0; i < nlinhas;i++) {//Calculo de Y
+		for (int n = 0; n < ncols;n++) {
+			float soma = 0;
+			for (int k = 0; k < i; k++) {
+				soma+=LU.elems[i][k] * Y.elems[k][n];
 			}
-			else {
+			Y.elems[i][n] = (i == n) ?  1 - soma : -soma;
+		}
+	}
 
+	for (int i = nlinhas-1; i >=0 ; i--) {//Calculo de Y
+		for (int n = 0; n < ncols; n++) {
+			float soma = 0;
+			for (int k = i+1; k < nlinhas; k++) {
+				soma += LU.elems[i][k] * B.elems[k][n];
+				B.elems[i][n] = (1 / LU.elems[i][i])*(Y.elems[i][n] - soma);
 			}
 		}
 	}
+	
+	B.Escrever();
 	return Matriz();
 }
 

@@ -45,7 +45,13 @@ int main(){
 	m3 = m3.DecomporLU();
 	m3.Escrever();
 	printf("\nDeterminante de m3: %g\n",m3.calcularDet());
+	Matriz m4;
+	m4.Ler("matriz4.txt");
 
+
+	printf("\nDeterminante de m4: %g\n", m4.calcularDet());
+
+	m4.obterInversa();
 
 	system("pause");
 }
