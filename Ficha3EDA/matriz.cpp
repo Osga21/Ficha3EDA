@@ -215,8 +215,7 @@ float Matriz::calcularDet()
 }
 
 Matriz Matriz::obterInversa()
-{	
-	Matriz LU= DecomporLU();
+{	Matriz LU= DecomporLU();
 	Matriz Y(nlinhas,ncols);
 	Matriz B(nlinhas, ncols);
 	B = Y;
@@ -230,13 +229,14 @@ Matriz Matriz::obterInversa()
 		}
 	}
 
-	for (int i = nlinhas-1; i >=0 ; i--) {//Calculo de Y
+	for (int i = nlinhas-1; i >=0 ; i--) {
 		for (int n = 0; n < ncols; n++) {
 			float soma = 0;
 			for (int k = i+1; k < nlinhas; k++) {
 				soma += LU.elems[i][k] * B.elems[k][n];
-				B.elems[i][n] = (1 / LU.elems[i][i])*(Y.elems[i][n] - soma);
+				
 			}
+			B.elems[i][n] = (1 / LU.elems[i][i])*(Y.elems[i][n] - soma);
 		}
 	}
 	
