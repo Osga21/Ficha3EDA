@@ -200,48 +200,65 @@ Matriz Matriz::DecomporLU()
 }
 
 float Matriz::calcularDet()
-/*Apenas para matrizes quadradas, baseado em DecomporLU*/
+/*Apenas para matrizes quadradas, baseado em DecomporLU
+devolve o determinante de uma matriz caso seja quadrada. Devolve
+0 se matriz de entrada for inválida*/
 {
 	float det = 1;
-	for (int i = 0; i < nlinhas; i++) {
-		for (int j = 0; j < ncols; j++) {
-			if (i == j) {
-				det *= elems[i][j];
+
+	if (nlinhas == ncols) {
+		for (int i = 0; i < nlinhas; i++) {
+			for (int j = 0; j < ncols; j++) {
+				if (i == j) {
+					det *= elems[i][j];
+				}
 			}
 		}
 	}
-	
+
+	else
+		det = 0;
 	return det;
+
 }
 
 Matriz Matriz::obterInversa()
-{	Matriz LU= DecomporLU();
-	Matriz Y(nlinhas,ncols);
-	Matriz B(nlinhas, ncols);
-	B = Y;
-	for (int i = 0; i < nlinhas;i++) {//Calculo de Y
-		for (int n = 0; n < ncols;n++) {
-			float soma = 0;
-			for (int k = 0; k < i; k++) {
-				soma+=LU.elems[i][k] * Y.elems[k][n];
-			}
-			Y.elems[i][n] = (i == n) ?  1 - soma : -soma;
-		}
-	}
-
-	for (int i = nlinhas-1; i >=0 ; i--) {
-		for (int n = 0; n < ncols; n++) {
-			float soma = 0;
-			for (int k = i+1; k < nlinhas; k++) {
-				soma += LU.elems[i][k] * B.elems[k][n];
-				
-			}
-			B.elems[i][n] = (1 / LU.elems[i][i])*(Y.elems[i][n] - soma);
-		}
-	}
+{	/*Devolve inversa de uma matriz caso a matriz não 
+	seja invertivel devolve matriz devolve matriz nula*/
 	
-	B.Escrever();
-	return Matriz();
+	Matriz B(nlinhas, ncols);
+	if (calcularDet() == 0) //Verificar  matriz é invertivel
+		return B;
+	
+	else {
+		Matriz LU = DecomporLU();
+		Matriz Y(nlinhas, ncols);
+		Matriz B(nlinhas, ncols);
+		B = Y;
+
+		for (int i = 0; i < nlinhas; i++) {//Calculo de matriz Y
+			for (int n = 0; n < ncols; n++) {
+				float soma = 0;
+				for (int k = 0; k < i; k++) {
+					soma += LU.elems[i][k] * Y.elems[k][n];
+				}
+				Y.elems[i][n] = (i == n) ? 1 - soma : -soma;
+			}
+		}
+
+		for (int i = nlinhas - 1; i >= 0; i--) { //Calculo de matriz inversa
+			for (int n = 0; n < ncols; n++) {
+				float soma = 0;
+				for (int k = i + 1; k < nlinhas; k++) {
+					soma += LU.elems[i][k] * B.elems[k][n];
+
+				}
+				B.elems[i][n] = (1 / LU.elems[i][i])*(Y.elems[i][n] - soma);
+			}
+		}
+
+		return B;
+	}
 }
 
 
